@@ -83,7 +83,7 @@
     </div>
 
     <div class="main-body">
-        
+        <div class="ad-banner">Advertisement Space (Google AdSense)</div>
 
         <!-- HOME PAGE -->
         <div id="pageHome" class="page active-page">
@@ -111,14 +111,6 @@
                 <button class="menu-btn" onclick="openPage('pageAvgPurity', 'Average Purity Calculator')"><span>AVERAGE PURITY CALCULATOR</span> <span>➔</span></button>
                 <div class="menu-desc">Calculate average purity percentage for mixed gold metals.</div>
             </div>
-           <!-- Large Video Ad Space -->
-<div style="width: 90%; max-width: 350px; height: 260px; background-color: #f7e9c5; border: 2px dashed #b89753; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px auto; text-align: center; font-family: sans-serif; color: #5c4315;">
-    <div>
-        <strong style="font-size: 16px;">Video Ad Space</strong><br>
-        <span style="font-size: 13px; opacity: 0.8;">Advertisement</span>
-    </div>
-</div>
-           
         </div>
 
         <!-- ALLOY CALCULATOR -->
@@ -189,31 +181,20 @@
             <button class="btn-action" onclick="calcAvgPurity()">CALCULATE AVERAGE</button>
         </div>
 
-     <!-- RESULT SLIP PAGE -->
-<div id="pageResultSlip" class="page">
-    <div class="receipt-card" id="captureSlip">
-        <div class="receipt-header">
-            <h4 id="slipTitle">MELTING & PURITY SLIP</h4>
-            <small style="color: #666;" id="slipDate"></small>
+        <!-- RESULT SLIP PAGE -->
+        <div id="pageResultSlip" class="page">
+            <div class="receipt-card" id="captureSlip">
+                <div class="receipt-header">
+                    <h4 id="slipTitle">MELTING & PURITY SLIP</h4>
+                    <small style="color: #666;" id="slipDate"></small>
+                </div>
+                <div id="slipBody"></div>
+            </div>
+            
+            <button class="btn-action btn-save" onclick="saveSlipAsImage()">📷 SAVE AS IMAGE</button>
+            <button class="btn-action btn-share" onclick="shareWhatsApp()">💬 SHARE TO WHATSAPP</button>
+            <button class="btn-action btn-clear" onclick="goHome()">🏠 GO TO HOME</button>
         </div>
-        <div id="slipBody"></div>
-    </div>
-    
-    <button class="btn-action btn-save" onclick="saveSlipAsImage()">📷 VIEW RECEIPT IMAGE</button>
-    <button class="btn-action btn-share" onclick="shareWhatsApp()">💬 SHARE TO WHATSAPP</button>
-    <button class="btn-action btn-clear" onclick="goHome()">🏠 GO TO HOME</button>
-
-    <!-- IN-APP SAFE PREVIEW MODAL -->
-    <div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:999; padding:20px; box-sizing:border-box; text-align:center;">
-        <div style="background:#fff; border-radius:12px; padding:15px; max-width:400px; margin:40px auto; border:2px solid #dfa743;">
-            <h4 style="color:#3a281c; margin-bottom:5px;">Receipt Image Created</h4>
-            <p style="color:#666; font-size:12px; margin-bottom:10px;">Please take a <b>Screenshot</b> to save this to your Gallery.</p>
-            <div id="modalImageContainer" style="margin-bottom:15px;"></div>
-            <button class="btn-action" onclick="closeImageModal()">CLOSE PREVIEW</button>
-        </div>
-    </div>
-</div>
-
 
         <!-- OPTIONS PAGE -->
         <div id="pageOptions" class="page">
@@ -514,14 +495,6 @@
     }
 
     resetMeltingRows();
-   <!-- Large Video Ad Container -->
-<div style="width: 100%; max-width: 350px; height: 280px; background-color: #f7e9c5; border: 2px dashed #b89753; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 20px auto; text-align: center; font-family: sans-serif; color: #5c4315;">
-    <div>
-        <strong style="font-size: 16px;">Video Ad Space</strong><br>
-        <span style="font-size: 13px; opacity: 0.8;">Advertisement</span>
-    </div>
-</div>
-   
 </script>
 </body>
 </html>
