@@ -467,6 +467,245 @@
     }
 
     resetMeltingRows();
+
+<script>
+    let pageHistory = ['pageHome'];
+    let lastActivePage = 'pageMelting';
+    let lastActiveTitle = 'Melting Calculator';
+
+    function openPage(pageId, title = '') {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+        document.getElementById(pageId).classList.add('active-page');
+        
+        if(pageId === 'pageHome') {
+            document.getElementById('topHeader').style.display = 'block';
+            document.getElementById('subHeader').style.display = 'none';
+            pageHistory = ['pageHome'];
+        } else {
+            document.getElementById('topHeader').style.display = 'none';
+            document.getElementById('subHeader').style.display = 'flex';
+            document.getElementById('headerTitle').innerText = title;
+            if(pageId !== 'pageResultSlip' && pageId !== 'pageOptions') {
+                lastActivePage = pageId;
+                lastActiveTitle = title;
+            }
+            if(pageHistory[pageHistory.length - 1] !== pageId) {
+                pageHistory.push(pageId);
+            }
+        }
+    }
+
+    function restoreLastState() {
+        openPage(lastActivePage, lastActiveTitle);
+    }
+
+    function goBack() {
+        if(pageHistory.length > 1) {
+            pageHistory.pop();
+            let prevPage = pageHistory[pageHistory.length - 1];
+            if(prevPage === 'pageHome') goHome();
+            else openPage(prevPage, document.getElementById('headerTitle').innerText);
+        } else { goHome(); }
+    }
+
+    function goHome() { openPage('pageHome'); }
+
+    function goToAlloyStep2() {
+        let w = parseFloat(document.getElementById('alloyWeight').value);
+        let c = parseFloat(document.getElementById('alloyCurrent').value);
+        let t = parseFloat(document.getElementById('alloyTarget').value);
+        if(!w || !c || !t) { alert('Please enter all values!'); return; }
+
+        document.getElementById('summaryWeight').innerText = w.toFixed(3);
+        document.getElementById('summaryCurrent').innerText = c.toFixed(2);
+        document.getElementById('summaryTarget').innerText = t.toFixed(2);
+        openPage('pageAlloy2', 'Enter Fine Purity');
+    }
+
+    function calculateAlloyFinal() {
+        let w = parseFloat(document.getElementById('alloyWeight').value);
+        let c = parseFloat(document.getElementById('alloyCurrent').value);
+        let t = parseFloat(document.getElementById('alloyTarget').value);
+        let f = parseFloat(document.getElementById('alloyFinePurity').value) || 99.99;
+        let needed = (w * (t - c)) / (f - t);
+        
+        let html = `
+            <div class="receipt-row"><span>Metal Weight:</span><b>${w.toFixed(3)} gm</b></div>
+            <div class="receipt-row"><span>Current Purity:</span><b>${c.toFixed(2)} %</b></div>
+            <div class="receipt-row"><span>Target Purity:</span><b>${t.toFixed(2)} %</b></div>
+            <div class="receipt-row"><span>Fine Used Purity:</span><b>${f.toFixed(2)} %</b></div>
+            <div class="receipt-row total"><span>Fine Metal Needed:</span><b>${Math.abs(needed).toFixed(3)} gm</b></div>
+        `;
+        showSlip('ALLOY CALCULATION SLIP', html);
+    }
+
+    function clearAlloy1() {
+        document.getElementById('alloyWeight').value = '';
+        document.getElementById('alloyCurrent').value = '';
+        document.getElementById('alloyTarget').value = '';
+    }
+
+    function addMeltingRow(w = '', p = '') {
+        let tbody = document.getElementById('meltingRows');
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="number" class="m-weight" value="${w}" placeholder="00.000" oninput="calcMelting()" step="any"></td>
+            <td><input type="number" class="m-purity" value="${p}" placeholder="00.00" oninput="calcMelting()" step="any"></td>
+            <td><input type="number" class="m-fine" value="0.000" readonly style="background:#f5f5f5;"></td>
+        `;
+        tbody.appendChild(row);
+    }
+
+    function calcMelting() {
+        let weights = document.querySelectorAll('.m-weight');
+        let purities = document.querySelectorAll('.m-purity');
+        let fines = document.querySelectorAll('.m-fine');
+        
+        weights.forEach((wInput, index) => {
+            let w = parseFloat(wInput.value) || 0;
+            let p = parseFloat(purities[index].value) || 0;
+            fines[index].value = ((w * p) / 100).toFixed(3);
+        });
+    }
+
+    function resetMeltingRows() {
+        document.getElementById('meltingRows').innerHTML = '';
+        addMeltingRow();
+        addMeltingRow();
+        document.getElementById('meltTargetPurity').value = '';
+    }
+
+    function processMeltingSlip() {
+        let weights = document.querySelectorAll('.m-weight');
+        let purities = document.querySelectorAll('.m-purity');
+        let totalW = 0, totalF = 0;
+        let html = '';
+
+        weights.forEach((wInput, index) => {
+            let w = parseFloat(wInput.value) || 0;
+            let p = parseFloat(purities[index].value) || 0;
+            if(w > 0) {
+                let f = (w * p) / 100;
+                totalW += w;
+                totalF += f;
+                html += `<div class="receipt-row"><span>Piece ${index+1}: ${w.toFixed(3)}gm @ ${p}%</span><b>${f.toFixed(3)} gm</b></div>`;
+            }
+        });
+
+        if(totalW === 0) { alert('Please enter piece details!'); return; }
+        let avgP = (totalF / totalW) * 100;
+
+        html += `
+            <div class="receipt-row total"><span>Total Weight:</span><b>${totalW.toFixed(3)} gm</b></div>
+            <div class="receipt-row total"><span>Total Fine:</span><b>${totalF.toFixed(3)} gm</b></div>
+            <div class="receipt-row total"><span>Average Purity:</span><b>${avgP.toFixed(2)} %</b></div>
+        `;
+        showSlip('MELTING & PURITY SLIP', html);
+    }
+
+    function clearCashMetal() {
+        document.getElementById('cashAmount').value = '';
+        document.getElementById('cashRate').value = '';
+    }
+
+    function clearMetalCash() {
+        document.getElementById('metalWeight').value = '';
+        document.getElementById('metalPurity').value = '';
+        document.getElementById('metalRate').value = '';
+    }
+
+    function processGenericSlip(type) {
+        let html = '';
+        if(type === 'Cash to Metal') {
+            let c = parseFloat(document.getElementById('cashAmount').value) || 0;
+            let r = parseFloat(document.getElementById('cashRate').value) || 0;
+            if(!c || !r) { alert('Enter values!'); return; }
+            html = `
+                <div class="receipt-row"><span>Cash Amount:</span><b>₹${c.toFixed(2)}</b></div>
+                <div class="receipt-row"><span>Rate/gm:</span><b>₹${r.toFixed(2)}</b></div>
+                <div class="receipt-row total"><span>Metal Weight:</span><b>${(c/r).toFixed(3)} gm</b></div>
+            `;
+        } else {
+            let w = parseFloat(document.getElementById('metalWeight').value) || 0;
+            let p = parseFloat(document.getElementById('metalPurity').value) || 0;
+            let r = parseFloat(document.getElementById('metalRate').value) || 0;
+            if(!w || !p || !r) { alert('Enter values!'); return; }
+            let fine = (w * p) / 100;
+            let total = fine * r;
+            html = `
+                <div class="receipt-row"><span>Weight:</span><b>${w.toFixed(3)} gm</b></div>
+                <div class="receipt-row"><span>Purity:</span><b>${p.toFixed(2)} %</b></div>
+                <div class="receipt-row"><span>Fine Metal:</span><b>${fine.toFixed(3)} gm</b></div>
+                <div class="receipt-row"><span>Rate/gm:</span><b>₹${r.toFixed(2)}</b></div>
+                <div class="receipt-row total"><span>Total Cash Value:</span><b>₹${total.toFixed(2)}</b></div>
+            `;
+        }
+        showSlip(type.toUpperCase() + ' SLIP', html);
+    }
+
+    function calcAvgPurity() {
+        let w1 = parseFloat(document.getElementById('avgW1').value) || 0, p1 = parseFloat(document.getElementById('avgP1').value) || 0;
+        let w2 = parseFloat(document.getElementById('avgW2').value) || 0, p2 = parseFloat(document.getElementById('avgP2').value) || 0;
+        let w3 = parseFloat(document.getElementById('avgW3').value) || 0, p3 = parseFloat(document.getElementById('avgP3').value) || 0;
+        
+        let tf = ((w1*p1)+(w2*p2)+(w3*p3))/100;
+        let tw = w1 + w2 + w3;
+        if(tw === 0) { alert('Enter at least one piece!'); return; }
+        
+        let avgP = (tf / tw) * 100;
+        let html = `
+            <div class="receipt-row"><span>Total Weight:</span><b>${tw.toFixed(3)} gm</b></div>
+            <div class="receipt-row"><span>Total Fine:</span><b>${tf.toFixed(3)} gm</b></div>
+            <div class="receipt-row total"><span>Average Purity:</span><b>${avgP.toFixed(2)} %</b></div>
+        `;
+        showSlip('AVERAGE PURITY SLIP', html);
+    }
+
+    function showSlip(title, html) {
+        document.getElementById('slipTitle').innerText = title;
+        document.getElementById('slipDate').innerText = new Date().toLocaleString();
+        document.getElementById('slipBody').innerHTML = html;
+        openPage('pageResultSlip', 'Calculation Result');
+    }
+
+    function saveSlipAsImage() {
+        html2canvas(document.getElementById('captureSlip')).then(canvas => {
+            let img = document.createElement('img');
+            img.src = canvas.toDataURL();
+            img.style.width = '100%';
+            img.style.borderRadius = '8px';
+            document.getElementById('modalImageContainer').innerHTML = '';
+            document.getElementById('modalImageContainer').appendChild(img);
+            document.getElementById('imageModal').style.display = 'block';
+        });
+    }
+
+    function closeImageModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function shareWhatsApp() {
+        let text = document.getElementById('slipTitle').innerText + '\n' + document.getElementById('slipDate').innerText;
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function shareApp() {
+        if(navigator.share) {
+            navigator.share({ title: 'Gold Alloy Calculator', url: window.location.href });
+        } else {
+            alert('Sharing link copied to clipboard!');
+        }
+    }
+
+    resetMeltingRows();
 </script>
+
+<div style="width: 100%; max-width: 350px; height: 250px; background-color: #f7e9c5; border: 2px dashed #b89753; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 15px auto; text-align: center; color: #5c4315;">
+    <div>
+        <strong style="font-size: 16px;">Video Ad Space</strong><br>
+        <span style="font-size: 13px; opacity: 0.8;">Advertisement</span>
+    </div>
+</div>
+
 </body>
 </html>
