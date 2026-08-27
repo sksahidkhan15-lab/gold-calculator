@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gold Alloy & Melting Calculator</title>
     <style>
         * {
@@ -11,41 +11,45 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body {
+        html, body {
+            width: 100%;
+            min-height: 100vh;
             background-color: #1a140e;
             color: #fff;
-            padding: 15px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
         }
+        
+        /* Full Width App Container (Fixes Side Ad Overflow) */
         .main-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             background: linear-gradient(180deg, #d4af37 0%, #ecd06b 15%, #fbe896 30%, #ecd06b 85%, #d4af37 100%);
-            border-radius: 20px;
+            min-height: 100vh;
             padding: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
         
         /* Top Header & Logo */
         .app-header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .logo-icon {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: #fff;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
         }
         .logo-icon svg {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             fill: #b38b24;
         }
 
@@ -55,7 +59,7 @@
             border: 2px solid #b38b24;
             border-radius: 12px;
             padding: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .city-dropdown-bar {
             margin-bottom: 10px;
@@ -65,17 +69,17 @@
             background: #36291e;
             color: #fff;
             border: 1px solid #d4af37;
-            padding: 6px 15px;
+            padding: 8px 15px;
             border-radius: 6px;
             font-size: 14px;
             font-weight: bold;
             outline: none;
-            width: 80%;
+            width: 90%;
             cursor: pointer;
         }
         .cards-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             justify-content: space-between;
         }
         .price-card {
@@ -83,26 +87,26 @@
             background: #18120e;
             border: 1px solid #473627;
             border-radius: 8px;
-            padding: 8px 5px;
+            padding: 8px 3px;
             text-align: center;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 0.4s ease;
         }
         .price-card.highlight {
             border: 1px solid #28a745;
         }
         .card-label {
-            font-size: 10px;
+            font-size: 9px;
             color: #d4af37;
             font-weight: bold;
             margin-bottom: 4px;
         }
         .card-value {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             color: #00e5ff;
         }
         
-        /* Tick animations */
+        /* Live Tick Flash Animation (Green / Red) */
         .price-up { background-color: #153e18 !important; }
         .price-up .card-value { color: #28a745 !important; }
         .price-down { background-color: #4a1515 !important; }
@@ -113,7 +117,7 @@
             background: #ffffed;
             color: #000;
             border-radius: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
@@ -122,29 +126,25 @@
             color: #f7d070;
             padding: 10px 15px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
         }
         .menu-body {
-            padding: 12px 15px;
-            font-size: 12px;
+            padding: 10px 15px;
+            font-size: 11px;
             color: #333;
             line-height: 1.4;
         }
 
-        /* AdSense Box */
-        .ads-space {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px dashed #7a5c1a;
-            border-radius: 8px;
+        /* Ad Container Fix */
+        .ads-container {
+            width: 100%;
+            margin-top: 15px;
             text-align: center;
-            padding: 10px;
-            font-size: 11px;
-            color: #47321a;
-            margin-top: 10px;
+            min-height: 50px;
         }
     </style>
 </head>
@@ -163,7 +163,7 @@
     <!-- Live Rates Header Block -->
     <div class="live-dashboard">
         <div class="city-dropdown-bar">
-            <select id="citySelect" onchange="changeCity()">
+            <select id="citySelect" onchange="fetchLiveGoldRates()">
                 <option value="Kolkata">📍 Kolkata</option>
                 <option value="Mumbai">📍 Mumbai</option>
                 <option value="Delhi">📍 Delhi</option>
@@ -177,20 +177,20 @@
         <div class="cards-row">
             <div class="price-card" id="card-gld">
                 <div class="card-label">GLD ₹</div>
-                <div class="card-value" id="val-gld">₹158,489</div>
+                <div class="card-value" id="val-gld">₹--,--</div>
             </div>
             <div class="price-card" id="card-retail">
                 <div class="card-label">RETAIL 999</div>
-                <div class="card-value" id="val-retail">₹157,672</div>
+                <div class="card-value" id="val-retail">₹--,--</div>
             </div>
             <div class="price-card highlight" id="card-gst">
                 <div class="card-label">999 WITH GST (3%)</div>
-                <div class="card-value" id="val-gst">₹163,418</div>
+                <div class="card-value" id="val-gst">₹--,--</div>
             </div>
         </div>
     </div>
 
-    <!-- Existing Calculators Section -->
+    <!-- Calculator Links -->
     <div class="menu-card">
         <div class="menu-header">★ ALLOY CALCULATOR <span>➔</span></div>
         <div class="menu-body">Our Signature Alloy Calculator. Calculate the amount of metal needed to reach a target purity.</div>
@@ -216,67 +216,52 @@
         <div class="menu-body">Calculate average purity percentage for mixed gold metals.</div>
     </div>
 
-    <!-- AdSense Space -->
-    <div class="ads-space">
-        Advertisement Space (Google AdSense)
+    <!-- Bottom Ad Container (Replaced Placeholder Text) -->
+    <div class="ads-container">
+        <script async="async" data-cfasync="false" src="https://pl31055193.profitableratecpmnetwork.com/1a5129a6f2fb88d3e52af257fd4f8ba8/invoke.js"></script>
+        <div id="container-1a5129a6f2fb88d3e52af257fd4f8ba8"></div>
     </div>
 </div>
 
 <script>
-    // আপনার আগের স্ক্রিপ্ট ও শেয়ার ফংশনসমূহ
-    function shareWhatsApp() {
-        let title = document.getElementById('slipTitle')?.innerText || 'Gold Calc';
-        let date = document.getElementById('slipDate')?.innerText || '';
-        let bodyText = document.getElementById('slipBody')?.innerText || '';
-        
-        let formattedMessage = `*${title}*\nDate: ${date}\n-----------------------------------\n${bodyText}\n-----------------------------------\n*Calculated via Gold Alloy Calculator*`;
-        let whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedMessage)}`;
-        window.open(whatsappUrl, '_blank');
+    let lastRates = { gld: 0, retail: 0, gst: 0 };
+
+    // Live Price Fetch & Tick Animation Logic
+    function fetchLiveGoldRates() {
+        // রিয়েল-টাইম লাইভ প্রাইস সিমুলেশন/API কল
+        // দ্রষ্টব্য: আপনার প্রোভাইডারের API লিঙ্ক থাকলে নিচে 'fetch()' এ বসাতে হবে।
+        let basePrice = 158000 + Math.floor(Math.random() * 800) - 400; 
+        let retailPrice = basePrice - 800;
+        let gstPrice = Math.round(retailPrice * 1.03);
+
+        updateCard('card-gld', 'val-gld', basePrice, lastRates.gld);
+        updateCard('card-retail', 'val-retail', retailPrice, lastRates.retail);
+        updateCard('card-gst', 'val-gst', gstPrice, lastRates.gst);
+
+        lastRates = { gld: basePrice, retail: retailPrice, gst: gstPrice };
     }
 
-    function shareApp() {
-        if(navigator.share) {
-            navigator.share({ title: 'Gold Calculator App', text: 'Check out this Gold Alloy & Melting Calculator!', url: window.location.href });
-        } else {
-            alert('Sharing link copied to clipboard!');
-        }
-    }
-
-    // লাইভ ডাইনামিক প্রাইস আপডেট এবং কালার ফ্ল্যাশ অ্যানিমেশন লজিক
-    let currentRates = { gld: 158489, retail: 157672, gst: 163418 };
-
-    function updateCardValue(cardId, valId, newValue, oldValue) {
+    function updateCard(cardId, valId, newVal, oldVal) {
         const card = document.getElementById(cardId);
-        const valElem = document.getElementById(valId);
-        
-        valElem.innerText = '₹' + newValue.toLocaleString('en-IN');
-        
-        if (newValue > oldValue) {
-            card.classList.add('price-up');
-            setTimeout(() => card.classList.remove('price-up'), 1200);
-        } else if (newValue < oldValue) {
-            card.classList.add('price-down');
-            setTimeout(() => card.classList.remove('price-down'), 1200);
+        const valSpan = document.getElementById(valId);
+
+        valSpan.innerText = '₹' + newVal.toLocaleString('en-IN');
+
+        if (oldVal > 0) {
+            if (newVal > oldVal) {
+                card.classList.add('price-up');
+                setTimeout(() => card.classList.remove('price-up'), 1000);
+            } else if (newVal < oldVal) {
+                card.classList.add('price-down');
+                setTimeout(() => card.classList.remove('price-down'), 1000);
+            }
         }
     }
 
-    function changeCity() {
-        // শহরের পরিবর্তনের সাথে কালার চেঞ্জ টেস্ট ডেমো
-        let variation = Math.floor(Math.random() * 500) - 250;
-        let newGld = currentRates.gld + variation;
-        let newRetail = currentRates.retail + variation;
-        let newGst = Math.round(newRetail * 1.03);
-
-        updateCardValue('card-gld', 'val-gld', newGld, currentRates.gld);
-        updateCardValue('card-retail', 'val-retail', newRetail, currentRates.retail);
-        updateCardValue('card-gst', 'val-gst', newGst, currentRates.gst);
-
-        currentRates = { gld: newGld, retail: newRetail, gst: newGst };
-    }
+    // প্রতি ৫ সেকেন্ড পর পর লাইভ দাম অটোমেটিক আপডেট করার টাইমার
+    fetchLiveGoldRates();
+    setInterval(fetchLiveGoldRates, 5000);
 </script>
-
-<script async="async" data-cfasync="false" src="https://pl31055193.profitableratecpmnetwork.com/1a5129a6f2fb88d3e52af257fd4f8ba8/invoke.js"></script>
-<div id="container-1a5129a6f2fb88d3e52af257fd4f8ba8"></div>
 
 </body>
 </html>
