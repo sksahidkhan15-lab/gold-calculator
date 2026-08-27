@@ -9,30 +9,47 @@
     * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; }
     body { background: #261c14; color: #333; max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
     
-    .top-header { background: linear-gradient(180deg, #1f140d 0%, #3a281c 100%); padding: 42px 15px 15px 15px; text-align: center; border-bottom: 2px solid #dfa743; }
+    .top-header { 
+        background: linear-gradient(180deg, #1f140d 0%, #3a281c 100%); 
+        padding: 42px 15px 15px 15px; 
+        text-align: center; 
+        border-bottom: 2px solid #dfa743; 
+    }
     .logo-circle { width: 75px; height: 75px; background: linear-gradient(135deg, #ffe596 0%, #d49826 100%); border-radius: 50%; margin: 5px auto; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 4px 15px rgba(212, 152, 38, 0.4); border: 2px solid #fff; }
     
-    .header-nav { display: none; justify-content: space-between; align-items: center; padding: 42px 15px 12px 15px; background: #1f140d; border-bottom: 2px solid #dfa743; color: #ffe596; }
-    .header-nav h3 { font-size: 17px; font-weight: 700; color: #ffd700; text-align: center; flex: 1; margin: 0 10px; }
-    .nav-btn { background: none; border: none; color: #ffd700; font-size: 26px; cursor: pointer; padding: 5px 10px; min-width: 40px; }
+    .header-nav { 
+        display: none; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 42px 15px 12px 15px; 
+        background: #1f140d; 
+        border-bottom: 2px solid #dfa743; 
+        color: #ffe596; 
+    }
+    .header-nav h3 { font-size: 17px; font-weight: 700; color: #ffd700; text-shadow: 0 1px 2px rgba(0,0,0,0.8); text-align: center; flex: 1; margin: 0 10px; }
+    .nav-btn { background: none; border: none; color: #ffd700; font-size: 26px; cursor: pointer; outline: none; padding: 5px 10px; min-width: 40px; }
 
     .main-body { background: linear-gradient(180deg, #fff3c4 0%, #fcd975 100%); flex: 1; padding: 15px; border-top-left-radius: 15px; border-top-right-radius: 15px; }
+    .ad-banner { background: rgba(0,0,0,0.06); border: 1px dashed #a67c1e; border-radius: 8px; text-align: center; padding: 6px; color: #5c430e; font-size: 11px; margin-bottom: 12px; font-weight: 600; }
 
     .menu-card { background: #fff8dc; border-radius: 15px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid #e0b354; }
     .menu-btn { width: 100%; background: linear-gradient(90deg, #3a281c 0%, #523927 100%); color: #ffd700; padding: 12px 16px; border: none; text-align: left; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-bottom: 1px solid #d49826; }
     .menu-desc { padding: 10px 14px; font-size: 12px; color: #4a3512; line-height: 1.4; font-weight: 500; }
 
-    .input-box { background: rgba(255, 255, 255, 0.85); border: 1.5px solid #c9932b; border-radius: 20px; padding: 8px 16px; margin-bottom: 12px; }
+    .input-box { background: rgba(255, 255, 255, 0.85); border: 1.5px solid #c9932b; border-radius: 20px; padding: 8px 16px; margin-bottom: 12px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
     .input-box label { display: block; font-size: 11px; font-weight: 700; color: #4a310a; text-transform: uppercase; margin-bottom: 2px; }
     .input-box input { width: 100%; background: transparent; border: none; outline: none; font-size: 15px; font-weight: 700; color: #1a0f03; }
+    .input-box input::placeholder { color: #a39171; font-weight: 500; }
 
-    .btn-action { width: 100%; background: linear-gradient(180deg, #4a3324 0%, #291b12 100%); color: #ffd700; border: 1px solid #dfa743; padding: 12px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; margin-bottom: 8px; text-align: center; }
-    .btn-clear { background: linear-gradient(180deg, #6e4f3a 0%, #473123 100%); color: #fff; }
-    .btn-share { background: #25d366; color: #fff; border: none; margin-top: 5px; }
-    .btn-save { background: #0288d1; color: #fff; border: none; }
+    .btn-action { width: 100%; background: linear-gradient(180deg, #4a3324 0%, #291b12 100%); color: #ffd700; border: 1px solid #dfa743; padding: 12px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; margin-bottom: 8px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.25); }
+    .btn-action:active { transform: scale(0.98); }
+    .btn-clear { background: linear-gradient(180deg, #6e4f3a 0%, #473123 100%); color: #fff; border-color: #8c684d; }
+    .btn-share { background: linear-gradient(180deg, #25d366 0%, #128c7e 100%); color: #fff; border: none; margin-top: 5px; }
+    .btn-save { background: linear-gradient(180deg, #0288d1 0%, #01579b 100%); color: #fff; border: none; }
 
-    .receipt-card { background: #ffffff; border: 2px solid #d49826; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+    .receipt-card { background: #ffffff; border: 2px solid #d49826; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
     .receipt-header { border-bottom: 2px dashed #d49826; padding-bottom: 8px; margin-bottom: 10px; text-align: center; }
+    .receipt-header h4 { color: #3a281c; font-size: 16px; font-weight: 800; }
     .receipt-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; color: #333; }
     .receipt-row.total { border-top: 1px solid #e0e0e0; font-weight: bold; color: #291b12; font-size: 14px; margin-top: 5px; padding-top: 6px; }
 
@@ -40,32 +57,17 @@
     .multi-table th { font-size: 11px; background: #3a281c; color: #ffd700; padding: 6px; text-align: center; border-radius: 4px; }
     .multi-table td { padding: 4px; }
     .multi-table input { width: 100%; padding: 6px; border: 1px solid #c9932b; border-radius: 6px; font-size: 13px; text-align: center; font-weight: 600; background: #fff; }
+    .multi-table input::placeholder { color: #a39171; font-weight: 400; }
     .btn-add-row { background: #27ae60; color: #fff; border: none; padding: 6px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
 
-    .opt-item { background: #fff8dc; border: 1px solid #e0b354; padding: 14px; border-radius: 10px; margin-bottom: 8px; font-weight: 700; color: #3a281c; cursor: pointer; }
-    .btn-google { background: #3a281c; color: #fff; border: 1px solid #ffd700; padding: 12px; border-radius: 25px; width: 100%; font-weight: bold; margin-top: 15px; }
+    .opt-item { background: #fff8dc; border: 1px solid #e0b354; padding: 14px; border-radius: 10px; margin-bottom: 8px; font-weight: 700; color: #3a281c; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .btn-google { background: #3a281c; color: #fff; border: 1px solid #ffd700; padding: 12px; border-radius: 25px; width: 100%; font-weight: bold; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
     .bottom-nav { background: #1f140d; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #dfa743; }
     .bottom-nav button { background: none; border: none; color: #ffd700; font-size: 20px; cursor: pointer; }
 
     .page { display: none; }
     .active-page { display: block; }
-    
-    /* Global Video Ad Styling inside body */
-    .global-video-ad {
-        width: 100%;
-        max-width: 350px;
-        height: 250px;
-        background-color: #f7e9c5;
-        border: 2px dashed #b89753;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 20px auto 10px auto;
-        text-align: center;
-        color: #5c4315;
-    }
 </style>
 </head>
 <body>
@@ -81,46 +83,47 @@
     </div>
 
     <div class="main-body">
+        <div class="ad-banner">Advertisement Space (Google AdSense)</div>
 
         <!-- HOME PAGE -->
         <div id="pageHome" class="page active-page">
             <div class="menu-card">
                 <button class="menu-btn" onclick="openPage('pageAlloy1', 'Gold Alloy Calculator')"><span>★ ALLOY CALCULATOR</span> <span>➔</span></button>
-                <div class="menu-desc">Calculate metal needed to reach a target purity.</div>
+                <div class="menu-desc">Our Signature Alloy Calculator. Calculate the amount of metal needed to reach a target purity.</div>
             </div>
 
             <div class="menu-card">
                 <button class="menu-btn" onclick="openPage('pageMelting', 'Multi-Piece Melting Calc')"><span>FINE PURITY / MELTING CALC</span> <span>➔</span></button>
-                <div class="menu-desc">Calculate fine weight for multiple gold pieces automatically.</div>
+                <div class="menu-desc">Calculate fine weight and alloy/fine needed for multiple gold pieces automatically.</div>
             </div>
 
             <div class="menu-card">
                 <button class="menu-btn" onclick="openPage('pageCashMetal', 'Cash to Metal')"><span>CASH TO METAL</span> <span>➔</span></button>
-                <div class="menu-desc">Calculate metal for a given amount of cash.</div>
+                <div class="menu-desc">Calculate the amount of metal you can get for a given amount of cash.</div>
             </div>
 
             <div class="menu-card">
                 <button class="menu-btn" onclick="openPage('pageMetalCash', 'Metal to Cash')"><span>METAL TO CASH</span> <span>➔</span></button>
-                <div class="menu-desc">Calculate cash value for weight and purity.</div>
+                <div class="menu-desc">Calculate cash value for a given weight, purity, and rate.</div>
             </div>
 
             <div class="menu-card">
                 <button class="menu-btn" onclick="openPage('pageAvgPurity', 'Average Purity Calculator')"><span>AVERAGE PURITY CALCULATOR</span> <span>➔</span></button>
-                <div class="menu-desc">Calculate average purity percentage for mixed metals.</div>
+                <div class="menu-desc">Calculate average purity percentage for mixed gold metals.</div>
             </div>
         </div>
 
         <!-- ALLOY CALCULATOR -->
         <div id="pageAlloy1" class="page">
-            <div class="input-box"><label>Enter Metal Weight (gm)</label><input type="number" id="alloyWeight" placeholder="00.000" step="any"></div>
-            <div class="input-box"><label>Enter Current Purity (%)</label><input type="number" id="alloyCurrent" placeholder="00.00" step="any"></div>
-            <div class="input-box"><label>Enter Target Purity (%)</label><input type="number" id="alloyTarget" placeholder="00.00" step="any"></div>
+            <div class="input-box"><label>Enter Metal Weight (gm)</label><input type="number" id="alloyWeight" placeholder="e.g. 00.000" step="any"></div>
+            <div class="input-box"><label>Enter Current Purity (%)</label><input type="number" id="alloyCurrent" placeholder="e.g. 00.00" step="any"></div>
+            <div class="input-box"><label>Enter Target Purity (%)</label><input type="number" id="alloyTarget" placeholder="e.g. 00.00" step="any"></div>
             <button class="btn-action" onclick="goToAlloyStep2()">CALCULATE FINE METAL NEEDED</button>
             <button class="btn-action btn-clear" onclick="clearAlloy1()">CLEAR</button>
         </div>
 
         <div id="pageAlloy2" class="page">
-            <div style="font-size: 12px; color: #3a281c; margin-bottom: 10px; padding: 10px; background: #fff; border-radius: 8px; border: 1px solid #d49826;">
+            <div style="font-size: 12px; color: #3a281c; margin-bottom: 10px; line-height: 1.6; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #d49826;">
                 <div>Metal Weight: <b id="summaryWeight">0.000</b> gm</div>
                 <div>Current Purity: <b id="summaryCurrent">0.00</b> %</div>
                 <div>Target Purity: <b id="summaryTarget">0.00</b> %</div>
@@ -145,7 +148,7 @@
             
             <div class="input-box" style="margin-top: 5px;">
                 <label>Target Purity (%) [Optional]</label>
-                <input type="number" id="meltTargetPurity" placeholder="00.00" oninput="calcMelting()" step="any">
+                <input type="number" id="meltTargetPurity" placeholder="e.g. 00.00" oninput="calcMelting()" step="any">
             </div>
 
             <button class="btn-action btn-clear" onclick="resetMeltingRows()">CLEAR ALL</button>
@@ -154,30 +157,31 @@
 
         <!-- CASH TO METAL -->
         <div id="pageCashMetal" class="page">
-            <div class="input-box"><label>Cash Amount (₹)</label><input type="number" id="cashAmount" placeholder="000" step="any"></div>
-            <div class="input-box"><label>Rate / gm (₹)</label><input type="number" id="cashRate" placeholder="000" step="any"></div>
+            <div class="input-box"><label>Cash Amount (₹)</label><input type="number" id="cashAmount" placeholder="e.g. 000" step="any"></div>
+            <div class="input-box"><label>Rate / gm (₹)</label><input type="number" id="cashRate" placeholder="e.g. 000" step="any"></div>
             <button class="btn-action btn-clear" onclick="clearCashMetal()">CLEAR</button>
             <button class="btn-action" onclick="processGenericSlip('Cash to Metal')">VIEW SLIP & SHARE</button>
         </div>
 
         <!-- METAL TO CASH -->
         <div id="pageMetalCash" class="page">
-            <div class="input-box"><label>Enter Weight (gm)</label><input type="number" id="metalWeight" placeholder="00.000" step="any"></div>
-            <div class="input-box"><label>Enter Purity (%)</label><input type="number" id="metalPurity" placeholder="00.00" step="any"></div>
-            <div class="input-box"><label>Enter Rate / gm (₹)</label><input type="number" id="metalRate" placeholder="000" step="any"></div>
+            <div class="input-box"><label>Enter Weight (gm)</label><input type="number" id="metalWeight" placeholder="e.g. 00.000" step="any"></div>
+            <div class="input-box"><label>Enter Purity (%)</label><input type="number" id="metalPurity" placeholder="e.g. 00.00" step="any"></div>
+            <div class="input-box"><label>Enter Rate / gm (₹)</label><input type="number" id="metalRate" placeholder="e.g. 000" step="any"></div>
             <button class="btn-action btn-clear" onclick="clearMetalCash()">CLEAR</button>
             <button class="btn-action" onclick="processGenericSlip('Metal to Cash')">VIEW SLIP & SHARE</button>
         </div>
 
         <!-- AVERAGE PURITY -->
         <div id="pageAvgPurity" class="page">
-            <div class="input-box"><label>Piece 1: Weight & Purity</label><input type="number" id="avgW1" placeholder="00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP1" placeholder="00.00" style="width:48%; display:inline;" step="any"></div>
-            <div class="input-box"><label>Piece 2: Weight & Purity</label><input type="number" id="avgW2" placeholder="00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP2" placeholder="00.00" style="width:48%; display:inline;" step="any"></div>
-            <div class="input-box"><label>Piece 3: Weight & Purity</label><input type="number" id="avgW3" placeholder="00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP3" placeholder="00.00" style="width:48%; display:inline;" step="any"></div>
+            <p style="font-size: 12px; font-weight: bold; color: #3a281c; margin-bottom: 8px;">Enter pieces to get average purity:</p>
+            <div class="input-box"><label>Piece 1: Weight & Purity</label><input type="number" id="avgW1" placeholder="e.g. 00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP1" placeholder="e.g. 00.00" style="width:48%; display:inline;" step="any"></div>
+            <div class="input-box"><label>Piece 2: Weight & Purity</label><input type="number" id="avgW2" placeholder="e.g. 00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP2" placeholder="e.g. 00.00" style="width:48%; display:inline;" step="any"></div>
+            <div class="input-box"><label>Piece 3: Weight & Purity</label><input type="number" id="avgW3" placeholder="e.g. 00.000" style="width:48%; display:inline;" step="any"> <input type="number" id="avgP3" placeholder="e.g. 00.00" style="width:48%; display:inline;" step="any"></div>
             <button class="btn-action" onclick="calcAvgPurity()">CALCULATE AVERAGE</button>
         </div>
 
-        <!-- RESULT SLIP -->
+        <!-- RESULT SLIP PAGE -->
         <div id="pageResultSlip" class="page">
             <div class="receipt-card" id="captureSlip">
                 <div class="receipt-header">
@@ -187,40 +191,31 @@
                 <div id="slipBody"></div>
             </div>
             
-            <button class="btn-action btn-save" onclick="saveSlipAsImage()">📷 VIEW RECEIPT IMAGE</button>
+            <button class="btn-action btn-save" onclick="saveSlipAsImage()">📷 SAVE AS IMAGE</button>
             <button class="btn-action btn-share" onclick="shareWhatsApp()">💬 SHARE TO WHATSAPP</button>
             <button class="btn-action btn-clear" onclick="goHome()">🏠 GO TO HOME</button>
-
-            <div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:999; padding:20px; text-align:center;">
-                <div style="background:#fff; border-radius:12px; padding:15px; max-width:400px; margin:40px auto; border:2px solid #dfa743;">
-                    <h4 style="color:#3a281c; margin-bottom:5px;">Receipt Image</h4>
-                    <div id="modalImageContainer" style="margin-bottom:15px;"></div>
-                    <button class="btn-action" onclick="closeImageModal()">CLOSE</button>
-                </div>
-            </div>
         </div>
 
-        <!-- OPTIONS -->
+        <!-- OPTIONS PAGE -->
         <div id="pageOptions" class="page">
-            <div class="opt-item" onclick="alert('Gold Alloy & Melting Calculator v1.0.0')">ℹ️ About App</div>
-            <div class="opt-item" onclick="alert('Redirecting...')">⭐ Rate App</div>
+            <div class="opt-item" onclick="alert('Gold Alloy & Melting Calculator v1.0.0\nDesigned for Jewellers.')">ℹ️ About App</div>
+            <div class="opt-item" onclick="alert('Redirecting to Google Play Store...')">⭐ Rate on Play Store</div>
+            <div class="opt-item" onclick="alert('Opening Developer Apps...')">📱 More Apps by Us</div>
             <div class="opt-item" onclick="shareApp()">🔗 Share App</div>
-            <button class="btn-google" onclick="alert('Google Login successful!')">LOGIN WITH GOOGLE G</button>
-        </div>
-
-        <!-- SINGLE VIDEO AD INSIDE BODY (Shows on every page at the bottom of content) -->
-        <div class="global-video-ad">
-            <div>
-                <strong style="font-size: 16px;">Video Ad Space</strong><br>
-                <span style="font-size: 13px; opacity: 0.8;">Advertisement</span>
-            </div>
+            <button class="btn-google" onclick="alert('Google Login successful!')">
+                <span>LOGIN WITH GOOGLE</span> <b style="font-size: 16px;">G</b>
+            </button>
+            <div style="text-align: center; margin-top: 15px; font-size: 11px; color: #5c430e; font-weight: bold;">Version 1.0.0</div>
         </div>
 
     </div>
 
+    <div style="background: #fcd975; padding: 0 15px;">
+        <div class="ad-banner" style="margin-bottom: 5px;">Advertisement Space (Google AdSense)</div>
+    </div>
     <div class="bottom-nav">
         <button onclick="goHome()">🏠</button>
-        <button onclick="restoreLastState()">🕒</button>
+        <button onclick="restoreLastState()" title="Restore Last Calculation">🕒</button>
         <button onclick="openPage('pageOptions', 'Options')">☰</button>
     </div>
 
@@ -251,7 +246,9 @@
         }
     }
 
-    function restoreLastState() { openPage(lastActivePage, lastActiveTitle); }
+    function restoreLastState() {
+        openPage(lastActivePage, lastActiveTitle);
+    }
 
     function goBack() {
         if(pageHistory.length > 1) {
@@ -264,11 +261,13 @@
 
     function goHome() { openPage('pageHome'); }
 
+    /* ALLOY LOGIC */
     function goToAlloyStep2() {
         let w = parseFloat(document.getElementById('alloyWeight').value);
         let c = parseFloat(document.getElementById('alloyCurrent').value);
         let t = parseFloat(document.getElementById('alloyTarget').value);
         if(!w || !c || !t) { alert('Please enter all values!'); return; }
+
         document.getElementById('summaryWeight').innerText = w.toFixed(3);
         document.getElementById('summaryCurrent').innerText = c.toFixed(2);
         document.getElementById('summaryTarget').innerText = t.toFixed(2);
@@ -280,7 +279,9 @@
         let c = parseFloat(document.getElementById('alloyCurrent').value);
         let t = parseFloat(document.getElementById('alloyTarget').value);
         let f = parseFloat(document.getElementById('alloyFinePurity').value) || 99.99;
+
         let needed = (w * (t - c)) / (f - t);
+        
         let html = `
             <div class="receipt-row"><span>Metal Weight:</span><b>${w.toFixed(3)} gm</b></div>
             <div class="receipt-row"><span>Current Purity:</span><b>${c.toFixed(2)} %</b></div>
@@ -297,48 +298,203 @@
         document.getElementById('alloyTarget').value = '';
     }
 
+    /* MELTING LOGIC */
     function addMeltingRow(w = '', p = '') {
         let tbody = document.getElementById('meltingRows');
         let row = document.createElement('tr');
         row.innerHTML = `
-            <td><input type="number" class="m-weight" value="${w}" placeholder="00.000" oninput="calcMelting()" step="any"></td>
-            <td><input type="number" class="m-purity" value="${p}" placeholder="00.00" oninput="calcMelting()" step="any"></td>
-            <td><input type="number" class="m-fine" value="0.000" readonly style="background:#f5f5f5;"></td>
+            <td><input type="number" class="m-weight" value="${w}" placeholder="e.g. 00.000" oninput="calcMelting()" step="any"></td>
+            <td><input type="number" class="m-purity" value="${p}" placeholder="e.g. 00.00" oninput="calcMelting()" step="any"></td>
+            <td><input type="number" class="m-fine" value="0.000" readonly style="background:#f0f0f0;"></td>
         `;
         tbody.appendChild(row);
+        calcMelting();
+    }
+
+    function resetMeltingRows() {
+        document.getElementById('meltingRows').innerHTML = '';
+        document.getElementById('meltTargetPurity').value = '';
+        addMeltingRow();
+        addMeltingRow();
+        addMeltingRow();
     }
 
     function calcMelting() {
         let weights = document.querySelectorAll('.m-weight');
         let purities = document.querySelectorAll('.m-purity');
         let fines = document.querySelectorAll('.m-fine');
-        weights.forEach((wInput, index) => {
-            let w = parseFloat(wInput.value) || 0;
-            let p = parseFloat(purities[index].value) || 0;
-            fines[index].value = ((w * p) / 100).toFixed(3);
-        });
-    }
 
-    function resetMeltingRows() {
-        document.getElementById('meltingRows').innerHTML = '';
-        addMeltingRow();
-        addMeltingRow();
-        document.getElementById('meltTargetPurity').value = '';
+        let totalW = 0, totalF = 0;
+
+        weights.forEach((wInput, i) => {
+            let w = parseFloat(wInput.value) || 0;
+            let p = parseFloat(purities[i].value) || 0;
+            let f = (w * p) / 100;
+            fines[i].value = f.toFixed(3);
+
+            totalW += w;
+            totalF += f;
+        });
+
+        return { totalW, totalF };
     }
 
     function processMeltingSlip() {
+        let data = calcMelting();
+        let targetP = parseFloat(document.getElementById('meltTargetPurity').value) || 0;
+        
+        let html = `<div style="border-bottom:1px dashed #d49826; padding-bottom:5px; margin-bottom:8px;">`;
         let weights = document.querySelectorAll('.m-weight');
         let purities = document.querySelectorAll('.m-purity');
-        let totalW = 0, totalF = 0;
-        let html = '';
-        weights.forEach((wInput, index) => {
+
+        weights.forEach((wInput, i) => {
             let w = parseFloat(wInput.value) || 0;
-            let p = parseFloat(purities[index].value) || 0;
+            let p = parseFloat(purities[i].value) || 0;
             if(w > 0) {
-                let f = (w * p) / 100;
-                totalW += w;
-                totalF += f;
-                html += `<div class="receipt-row"><span>Piece ${index+1}: ${w.toFixed(3)}gm @ ${p}%</span><b>${f.toFixed(3)} gm</b></div>`;
+                html += `<div class="receipt-row"><span>Piece ${i+1} (${w}g × ${p}%):</span><b>${((w*p)/100).toFixed(3)} F</b></div>`;
             }
         });
-        i
+        html += `</div>`;
+
+        html += `<div class="receipt-row"><span>Total Net Weight:</span><b>${data.totalW.toFixed(3)} gm</b></div>`;
+        html += `<div class="receipt-row total"><span>Total Pure Fine (F):</span><b>${data.totalF.toFixed(3)} gm</b></div>`;
+
+        if(targetP > 0 && data.totalW > 0) {
+            let currentAvgPurity = (data.totalF / data.totalW) * 100;
+
+            if(targetP <= currentAvgPurity) {
+                let finalTotalWeight = (data.totalF / (targetP / 100));
+                let alloyNeeded = finalTotalWeight - data.totalW;
+
+                html += `<div class="receipt-row" style="color:#b45309; margin-top:6px;"><span>Target Purity (${targetP}%):</span><b>${finalTotalWeight.toFixed(3)} gm Total</b></div>`;
+                html += `<div class="receipt-row total" style="color:#27ae60;"><span>Alloy / Copper Needed:</span><b>${alloyNeeded.toFixed(3)} gm</b></div>`;
+            } else {
+                let finePurity = 99.99;
+                let fineGoldNeeded = (data.totalW * (targetP - currentAvgPurity)) / (finePurity - targetP);
+                let finalTotalWeight = data.totalW + fineGoldNeeded;
+
+                html += `<div class="receipt-row" style="color:#b45309; margin-top:6px;"><span>Target Purity (${targetP}%):</span><b>${finalTotalWeight.toFixed(3)} gm Total</b></div>`;
+                html += `<div class="receipt-row total" style="color:#d32f2f;"><span>Pure Fine Gold Needed (99.99%):</span><b>${fineGoldNeeded.toFixed(3)} gm</b></div>`;
+            }
+        }
+
+        showSlip('MELTING & PURITY SLIP', html);
+    }
+
+    /* CASH / METAL LOGIC */
+    function calcCashToMetal() {
+        let cash = parseFloat(document.getElementById('cashAmount').value) || 0;
+        let rate = parseFloat(document.getElementById('cashRate').value) || 0;
+        return rate > 0 ? (cash / rate) : 0;
+    }
+    function clearCashMetal() {
+        document.getElementById('cashAmount').value = '';
+        document.getElementById('cashRate').value = '';
+    }
+
+    function calcMetalToCash() {
+        let w = parseFloat(document.getElementById('metalWeight').value) || 0;
+        let p = parseFloat(document.getElementById('metalPurity').value) || 0;
+        let r = parseFloat(document.getElementById('metalRate').value) || 0;
+        return Math.round(((w * p) / 100) * r);
+    }
+    function clearMetalCash() {
+        document.getElementById('metalWeight').value = '';
+        document.getElementById('metalPurity').value = '';
+        document.getElementById('metalRate').value = '';
+    }
+
+    function calcAvgPurity() {
+        let w1 = parseFloat(document.getElementById('avgW1').value)||0, p1 = parseFloat(document.getElementById('avgP1').value)||0;
+        let w2 = parseFloat(document.getElementById('avgW2').value)||0, p2 = parseFloat(document.getElementById('avgP2').value)||0;
+        let w3 = parseFloat(document.getElementById('avgW3').value)||0, p3 = parseFloat(document.getElementById('avgP3').value)||0;
+
+        let totW = w1 + w2 + w3;
+        let totF = ((w1*p1)/100) + ((w2*p2)/100) + ((w3*p3)/100);
+        let avgP = totW > 0 ? (totF / totW) * 100 : 0;
+
+        let html = `
+            <div class="receipt-row"><span>Total Weight:</span><b>${totW.toFixed(3)} gm</b></div>
+            <div class="receipt-row"><span>Total Fine:</span><b>${totF.toFixed(3)} gm</b></div>
+            <div class="receipt-row total"><span>Average Purity:</span><b>${avgP.toFixed(2)} %</b></div>
+        `;
+        showSlip('AVERAGE PURITY SLIP', html);
+    }
+
+    function processGenericSlip(type) {
+        let html = '';
+        if(type === 'Cash to Metal') {
+            let cash = parseFloat(document.getElementById('cashAmount').value) || 0;
+            let rate = parseFloat(document.getElementById('cashRate').value) || 0;
+            let res = calcCashToMetal();
+            html = `
+                <div class="receipt-row"><span>Cash Amount:</span><b>₹ ${cash}</b></div>
+                <div class="receipt-row"><span>Gold Rate / gm:</span><b>₹ ${rate}</b></div>
+                <div class="receipt-row total"><span>Metal You Get:</span><b>${res.toFixed(3)} gm</b></div>
+            `;
+        } else {
+            let w = parseFloat(document.getElementById('metalWeight').value) || 0;
+            let p = parseFloat(document.getElementById('metalPurity').value) || 0;
+            let r = parseFloat(document.getElementById('metalRate').value) || 0;
+            let res = calcMetalToCash();
+            html = `
+                <div class="receipt-row"><span>Metal Weight:</span><b>${w.toFixed(3)} gm</b></div>
+                <div class="receipt-row"><span>Purity:</span><b>${p.toFixed(2)} %</b></div>
+                <div class="receipt-row"><span>Rate / gm:</span><b>₹ ${r}</b></div>
+                <div class="receipt-row total"><span>Total Cash Value:</span><b>₹ ${res}</b></div>
+            `;
+        }
+        showSlip(type.toUpperCase() + ' SLIP', html);
+    }
+
+    function showSlip(title, bodyHtml) {
+        document.getElementById('slipTitle').innerText = title;
+        document.getElementById('slipDate').innerText = new Date().toLocaleString('en-IN');
+        document.getElementById('slipBody').innerHTML = bodyHtml;
+        openPage('pageResultSlip', 'Receipt Slip');
+    }
+
+    function saveSlipAsImage() {
+        let captureArea = document.getElementById('captureSlip');
+
+        html2canvas(captureArea, {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            logging: false
+        }).then(canvas => {
+            let imgData = canvas.toDataURL('image/png');
+            let downloadLink = document.createElement('a');
+            downloadLink.href = imgData;
+            downloadLink.download = 'Gold_Calculation_' + Date.now() + '.png';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }).catch(err => {
+            alert("Unable to generate receipt image. Please take a screenshot.");
+        });
+    }
+
+    function shareWhatsApp() {
+        let title = document.getElementById('slipTitle').innerText;
+        let date = document.getElementById('slipDate').innerText;
+        let bodyText = document.getElementById('slipBody').innerText;
+        
+        let formattedMessage = `*${title}*\nDate: ${date}\n-----------------------------------\n${bodyText}\n-----------------------------------\n*Calculated via Gold Alloy Calculator*`;
+        
+        let whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedMessage)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+
+    function shareApp() {
+        if(navigator.share) {
+            navigator.share({ title: 'Gold Calculator App', text: 'Check out this Gold Alloy & Melting Calculator!', url: window.location.href });
+        } else {
+            alert('Sharing link copied to clipboard!');
+        }
+    }
+
+    resetMeltingRows();
+</script>
+</body>
+</html>
